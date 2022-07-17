@@ -148,9 +148,9 @@ dependencies = [
 
 [[package]]
 name = "feed-rs"
-version = "1.0.0"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc6f51721365322ea2b7920033d9625dfbb776dab5ced2585b5f66ff2220852d"
+checksum = "9408095b97e7be8e6fd0c72fe401d8823ba73a7d5a803d51cba51d9949af2f4d"
 dependencies = [
  "chrono",
  "lazy_static",
@@ -374,9 +374,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.22.0"
+version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8533f14c8382aaad0d592c812ac3b826162128b65662331e1127b45c3d18536b"
+checksum = "9279fbdacaad3baf559d8cabe0acc3d06e30ea14931af31af79578ac0946decc"
 dependencies = [
  "encoding_rs",
  "memchr",
@@ -632,9 +632,9 @@ dependencies = [
 
 [[package]]
 name = "uuid"
-version = "0.8.2"
+version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
+checksum = "dd6469f4314d5f1ffec476e05f17cc9a78bc7a27a6a857842170bdf8d6f98d2f"
 dependencies = [
  "getrandom",
 ]

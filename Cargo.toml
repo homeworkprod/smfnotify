@@ -15,7 +15,7 @@ categories = ["command-line-utilities"]
 [dependencies]
 anyhow = "1.0"
 clap = { version = "3.2.12", features = ["derive"] }
-feed-rs = "1.0"
+feed-rs = "1.1"
 serde = { version = "1", features = ["derive"] }
 toml = "0.5"
 ureq = { version = "2.4.0", features = ["json"] }
