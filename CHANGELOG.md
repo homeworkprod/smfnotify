@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.2.0 (unreleased)
+## 0.2.0 (2022-07-17)
 
 - Added option `-q`/`--quiet` to suppress output.
 
