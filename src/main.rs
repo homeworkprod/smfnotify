@@ -26,14 +26,18 @@ fn main() -> Result<()> {
     let new_entries_len = new_entries.len();
 
     if new_entries_len > 0 {
-        println!("\nFound {new_entries_len} new entries.");
+        if !args.quiet {
+            println!("Found {new_entries_len} new entries.");
+        }
 
         announce::announce_new_entries(&config, &new_entries)?;
 
         let new_last_processed_id = &new_entries[0].id;
         write_last_processed_id(&config.last_processed_id_filename, new_last_processed_id)?;
     } else {
-        println!("Found no new entries.");
+        if !args.quiet {
+            println!("Found no new entries.");
+        }
     }
 
     Ok(())
