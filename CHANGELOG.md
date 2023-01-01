@@ -3,6 +3,8 @@
 
 ## 0.3.0 (unreleased)
 
+- Updated clap to v4.0.
+
 
 ## 0.2.0 (2022-07-17)
 
