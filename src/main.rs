@@ -3,6 +3,7 @@
  * License: MIT
  */
 
+use announce::Announcer;
 use anyhow::Result;
 use std::path::Path;
 mod announce;
@@ -15,6 +16,11 @@ fn main() -> Result<()> {
     let args = cli::parse_args();
 
     let config = config::load_config(&args.config_filename)?;
+
+    let announcer = Announcer {
+        webhook_text_template: config.webhook_text_template,
+        webhook_url: config.webhook_url,
+    };
 
     let last_processed_id = read_last_processed_id(&config.last_processed_id_filename);
 
@@ -30,7 +36,7 @@ fn main() -> Result<()> {
             println!("Found {new_entries_len} new entries.");
         }
 
-        announce::announce_new_entries(&config, &new_entries)?;
+        announcer.announce_new_entries(&new_entries)?;
 
         let new_last_processed_id = &new_entries[0].id;
         write_last_processed_id(&config.last_processed_id_filename, new_last_processed_id)?;

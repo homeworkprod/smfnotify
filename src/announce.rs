@@ -3,16 +3,23 @@
  * License: MIT
  */
 
-use crate::config::Config;
 use anyhow::Result;
 use feed_rs::model::Entry;
 
-pub(crate) fn announce_new_entries(config: &Config, entries: &[Entry]) -> Result<()> {
-    for entry in entries {
-        let text = assemble_text(&config.webhook_text_template, entry);
-        call_webhook(&config.webhook_url, &text)?;
+#[derive(Debug)]
+pub(crate) struct Announcer {
+    pub(crate) webhook_text_template: String,
+    pub(crate) webhook_url: String,
+}
+
+impl Announcer {
+    pub(crate) fn announce_new_entries(&self, entries: &[Entry]) -> Result<()> {
+        for entry in entries {
+            let text = assemble_text(&self.webhook_text_template, entry);
+            call_webhook(&self.webhook_url, &text)?;
+        }
+        Ok(())
     }
-    Ok(())
 }
 
 fn assemble_text(template: &str, entry: &Entry) -> String {
