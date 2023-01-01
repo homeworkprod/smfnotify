@@ -5,6 +5,7 @@
 
 use announce::Announcer;
 use anyhow::Result;
+use feed::FeedReader;
 use std::path::Path;
 mod announce;
 mod cli;
@@ -22,13 +23,14 @@ fn main() -> Result<()> {
         webhook_url: config.webhook_url,
     };
 
+    let feed_reader = FeedReader {
+        url: config.feed_url,
+        cookie_value: config.feed_cookie_value,
+    };
+
     let last_processed_id = read_last_processed_id(&config.last_processed_id_filename);
 
-    let new_entries = feed::get_new_entries(
-        &config.feed_url,
-        &config.feed_cookie_value,
-        last_processed_id,
-    )?;
+    let new_entries = feed_reader.get_new_entries(last_processed_id)?;
     let new_entries_len = new_entries.len();
 
     if new_entries_len > 0 {
