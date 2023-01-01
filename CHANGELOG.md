@@ -5,6 +5,8 @@
 
 - Updated clap to v4.0.
 
+- Updated feed-rs to v1.2.
+
 
 ## 0.2.0 (2022-07-17)
 
