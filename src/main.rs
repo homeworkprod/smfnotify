@@ -6,17 +6,22 @@
 use announce::Announcer;
 use anyhow::Result;
 use feed::FeedReader;
-use std::path::Path;
+use idkeeper::IdKeeper;
 mod announce;
 mod cli;
 mod config;
 mod feed;
 mod files;
+mod idkeeper;
 
 fn main() -> Result<()> {
     let args = cli::parse_args();
 
     let config = config::load_config(&args.config_filename)?;
+
+    let id_keeper = IdKeeper {
+        filename: config.last_processed_id_filename,
+    };
 
     let announcer = Announcer {
         webhook_text_template: config.webhook_text_template,
@@ -28,7 +33,7 @@ fn main() -> Result<()> {
         cookie_value: config.feed_cookie_value,
     };
 
-    let last_processed_id = read_last_processed_id(&config.last_processed_id_filename);
+    let last_processed_id = id_keeper.read_last_processed_id();
 
     let new_entries = feed_reader.get_new_entries(last_processed_id)?;
     let new_entries_len = new_entries.len();
@@ -41,21 +46,12 @@ fn main() -> Result<()> {
         announcer.announce_new_entries(&new_entries)?;
 
         let new_last_processed_id = &new_entries[0].id;
-        write_last_processed_id(&config.last_processed_id_filename, new_last_processed_id)?;
+        id_keeper.write_last_processed_id(new_last_processed_id)?;
     } else {
         if !args.quiet {
             println!("Found no new entries.");
         }
     }
 
-    Ok(())
-}
-
-fn read_last_processed_id(path: &Path) -> Option<String> {
-    files::read_text_file(path)
-}
-
-fn write_last_processed_id(path: &Path, last_processed_id: &str) -> Result<()> {
-    files::write_text_file(path, last_processed_id)?;
     Ok(())
 }
