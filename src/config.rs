@@ -10,11 +10,11 @@ use std::path::{Path, PathBuf};
 
 #[derive(Debug, Deserialize)]
 pub(crate) struct Config {
-    pub feed_cookie_value: String,
-    pub feed_url: String,
-    pub last_processed_id_filename: PathBuf,
-    pub webhook_text_template: String,
-    pub webhook_url: String,
+    pub(crate) feed_cookie_value: String,
+    pub(crate) feed_url: String,
+    pub(crate) last_processed_id_filename: PathBuf,
+    pub(crate) webhook_text_template: String,
+    pub(crate) webhook_url: String,
 }
 
 /// Load configuration from TOML file.
