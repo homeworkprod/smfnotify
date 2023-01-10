@@ -47,4 +47,4 @@ SMFNotify is licensed under the MIT license.
 
 ## Copyright
 
-Copyright 2022 Jochen Kupperschmidt
+Copyright 2022-2023 Jochen Kupperschmidt
