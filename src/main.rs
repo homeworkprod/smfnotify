@@ -5,6 +5,7 @@
 
 use announce::Announcer;
 use anyhow::Result;
+use config::Config;
 use feed::FeedReader;
 use idkeeper::IdKeeper;
 mod announce;
@@ -19,39 +20,58 @@ fn main() -> Result<()> {
 
     let config = config::load_config(&args.config_filename)?;
 
-    let id_keeper = IdKeeper {
-        filename: config.last_processed_id_filename,
-    };
+    let app = Application::new(config, args.quiet);
 
-    let announcer = Announcer {
-        webhook_text_template: config.webhook_text_template,
-        webhook_url: config.webhook_url,
-    };
+    app.run()?;
 
-    let feed_reader = FeedReader {
-        url: config.feed_url,
-        cookie_value: config.feed_cookie_value,
-    };
+    Ok(())
+}
 
-    let last_processed_id = id_keeper.read_last_processed_id();
+struct Application {
+    id_keeper: IdKeeper,
+    feed_reader: FeedReader,
+    announcer: Announcer,
+    quiet: bool,
+}
 
-    let new_entries = feed_reader.get_new_entries(last_processed_id)?;
-    let new_entries_len = new_entries.len();
-
-    if new_entries_len > 0 {
-        if !args.quiet {
-            println!("Found {new_entries_len} new entries.");
-        }
-
-        announcer.announce_new_entries(&new_entries)?;
-
-        let new_last_processed_id = &new_entries[0].id;
-        id_keeper.write_last_processed_id(new_last_processed_id)?;
-    } else {
-        if !args.quiet {
-            println!("Found no new entries.");
+impl Application {
+    fn new(config: Config, quiet: bool) -> Self {
+        Self {
+            id_keeper: IdKeeper {
+                filename: config.last_processed_id_filename,
+            },
+            feed_reader: FeedReader {
+                url: config.feed_url,
+                cookie_value: config.feed_cookie_value,
+            },
+            announcer: Announcer {
+                webhook_text_template: config.webhook_text_template,
+                webhook_url: config.webhook_url,
+            },
+            quiet,
         }
     }
 
-    Ok(())
+    fn run(&self) -> Result<()> {
+        let last_processed_id = self.id_keeper.read_last_processed_id();
+
+        let new_entries = &self.feed_reader.get_new_entries(last_processed_id)?;
+        let new_entries_len = new_entries.len();
+
+        if new_entries_len > 0 {
+            if !self.quiet {
+                println!("Found {new_entries_len} new entries.");
+            }
+
+            self.announcer.announce_new_entries(new_entries)?;
+
+            let new_last_processed_id = &new_entries[0].id;
+            self.id_keeper
+                .write_last_processed_id(new_last_processed_id)?;
+        } else if !self.quiet {
+            println!("Found no new entries.");
+        }
+
+        Ok(())
+    }
 }
