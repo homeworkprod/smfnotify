@@ -70,17 +70,14 @@ impl Application {
 
         let new_entries = &self.feed_reader.get_new_entries(last_processed_id)?;
         let new_entries_len = new_entries.len();
+        info!("New entries found: {new_entries_len}");
 
         if new_entries_len > 0 {
-            info!("Found {new_entries_len} new entries.");
-
             self.announcer.announce_new_entries(new_entries)?;
 
             let new_last_processed_id = &new_entries[0].id;
             self.id_keeper
                 .write_last_processed_id(new_last_processed_id)?;
-        } else {
-            info!("Found no new entries.");
         }
 
         Ok(())
