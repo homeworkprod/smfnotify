@@ -3,6 +3,9 @@
 
 ## 0.3.0 (unreleased)
 
+- Use proper logging. Output is written to stderr instead of stdout,
+  timestamps and log levels are included.
+
 - Updated clap to v4.0.
 
 - Updated feed-rs to v1.2.
