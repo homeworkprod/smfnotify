@@ -12,6 +12,8 @@ use config::Config;
 use feed::FeedReader;
 use idkeeper::IdKeeper;
 use log::LevelFilter;
+use std::thread;
+use std::time::Duration;
 mod announce;
 mod cli;
 mod config;
@@ -24,9 +26,11 @@ fn main() -> Result<()> {
 
     configure_logging(args.quiet);
 
+    let interval = args.interval.map(|secs| Duration::from_secs(secs));
+
     let config = config::load_config(&args.config_filename)?;
 
-    let app = Application::new(config);
+    let app = Application::new(config, interval);
 
     app.run()?;
 
@@ -46,10 +50,11 @@ struct Application {
     id_keeper: IdKeeper,
     feed_reader: FeedReader,
     announcer: Announcer,
+    interval: Option<Duration>,
 }
 
 impl Application {
-    fn new(config: Config) -> Self {
+    fn new(config: Config, interval: Option<Duration>) -> Self {
         Self {
             id_keeper: IdKeeper {
                 filename: config.last_processed_id_filename,
@@ -62,10 +67,19 @@ impl Application {
                 webhook_text_template: config.webhook_text_template,
                 webhook_url: config.webhook_url,
             },
+            interval,
         }
     }
 
     fn run(&self) -> Result<()> {
+        match self.interval {
+            Some(duration) => self.run_looped(duration)?,
+            None => self.run_once()?,
+        }
+        Ok(())
+    }
+
+    fn run_once(&self) -> Result<()> {
         let last_processed_id = self.id_keeper.read_last_processed_id();
 
         let new_entries = &self.feed_reader.get_new_entries(last_processed_id)?;
@@ -81,5 +95,14 @@ impl Application {
         }
 
         Ok(())
+    }
+
+    fn run_looped(&self, interval: Duration) -> Result<()> {
+        info!("Interval: {} seconds", interval.as_secs());
+
+        loop {
+            self.run_once()?;
+            thread::sleep(interval);
+        }
     }
 }
