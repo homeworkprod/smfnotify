@@ -26,11 +26,9 @@ fn main() -> Result<()> {
 
     configure_logging(args.quiet);
 
-    let interval = args.interval.map(|secs| Duration::from_secs(secs));
-
     let config = config::load_config(&args.config_filename)?;
 
-    let app = Application::new(config, interval);
+    let app = Application::new(config);
 
     app.run()?;
 
@@ -54,7 +52,7 @@ struct Application {
 }
 
 impl Application {
-    fn new(config: Config, interval: Option<Duration>) -> Self {
+    fn new(config: Config) -> Self {
         Self {
             id_keeper: IdKeeper {
                 filename: config.last_processed_id_filename,
@@ -67,7 +65,7 @@ impl Application {
                 webhook_text_template: config.webhook_text_template,
                 webhook_url: config.webhook_url,
             },
-            interval,
+            interval: config.interval,
         }
     }
 

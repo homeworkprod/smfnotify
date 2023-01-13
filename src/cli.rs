@@ -14,10 +14,6 @@ pub(crate) struct Args {
     #[clap(short = 'c', long = "config")]
     pub config_filename: PathBuf,
 
-    /// Repeat processing after this interval (in seconds)
-    #[clap(long)]
-    pub interval: Option<u64>,
-
     /// Suppress output
     #[clap(short, long)]
     pub quiet: bool,

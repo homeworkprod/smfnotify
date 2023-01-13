@@ -3,7 +3,8 @@
 
 ## 0.3.0 (unreleased)
 
-- Added option `--interval` to repeatedly fetch and process new entries.
+- Added interval configuration property to repeatedly fetch and process
+  new entries. Adds dependency on serde_with.
 
 - Use proper logging. Output is written to stderr instead of stdout,
   timestamps and log levels are included.

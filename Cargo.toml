@@ -19,5 +19,6 @@ env_logger = { version = "0.10.0", default-features = false }
 feed-rs = "1.2"
 log = "0.4.17"
 serde = { version = "1", features = ["derive"] }
+serde_with = "2.2.0"
 toml = "0.5"
 ureq = { version = "2.5.0", features = ["json"] }
