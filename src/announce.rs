@@ -3,7 +3,6 @@
  * License: MIT
  */
 
-use anyhow::Result;
 use feed_rs::model::Entry;
 
 #[derive(Debug)]
@@ -13,12 +12,11 @@ pub(crate) struct Announcer {
 }
 
 impl Announcer {
-    pub(crate) fn announce_new_entries(&self, entries: &[Entry]) -> Result<()> {
+    pub(crate) fn announce_new_entries(&self, entries: &[Entry]) {
         for entry in entries {
             let text = assemble_text(&self.webhook_text_template, entry);
-            call_webhook(&self.webhook_url, &text)?;
+            call_webhook(&self.webhook_url, &text);
         }
-        Ok(())
     }
 }
 
@@ -63,8 +61,11 @@ fn get_entry_url(entry: &Entry) -> String {
         .to_string()
 }
 
-fn call_webhook(url: &str, text: &str) -> Result<()> {
+fn call_webhook(url: &str, text: &str) {
     let request = ureq::post(url);
-    request.send_json(ureq::json!({ "text": text }))?;
-    Ok(())
+    let result = request.send_json(ureq::json!({ "text": text }));
+    match result {
+        Err(e) => error!("Call to webhook failed: {}", e),
+        Ok(_) => info!("Call to webhook succeeded"),
+    };
 }

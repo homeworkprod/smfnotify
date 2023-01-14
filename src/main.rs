@@ -81,7 +81,7 @@ impl Application {
         info!("New entries found: {new_entries_len}");
 
         if new_entries_len > 0 {
-            self.announcer.announce_new_entries(new_entries)?;
+            self.announcer.announce_new_entries(new_entries);
 
             let new_last_processed_id = &new_entries[0].id;
             self.id_keeper

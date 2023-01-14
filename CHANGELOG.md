@@ -8,6 +8,8 @@
 
 - Added missing Docker mount for file with last processed ID.
 
+- Log success or failure of webhook calls instead of exiting.
+
 
 ## 0.3.0 (2023-01-24)
 
