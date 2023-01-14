@@ -17,8 +17,10 @@ pub(crate) struct Config {
     #[serde(default = "get_default_log_level")]
     #[serde_as(as = "DisplayFromStr")]
     pub(crate) log_level: Level,
+
     pub(crate) feed_cookie_value: String,
     pub(crate) feed_url: String,
+    pub(crate) feed_max_new_entries: usize,
 
     pub(crate) last_processed_id_filename: PathBuf,
 

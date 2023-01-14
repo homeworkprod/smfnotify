@@ -25,6 +25,7 @@ looks like this:
 ```toml
 feed_url = "https://forum.example.com/index.php?action=.xml;type=atom"
 feed_cookie_value = "<insert value of your 'SMFCookie10' cookie>"
+feed_max_new_entries = 5
 
 last_processed_id_filename = "last_processed_id"
 

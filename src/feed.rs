@@ -12,6 +12,7 @@ use std::io::Read;
 pub(crate) struct FeedReader {
     pub(crate) url: String,
     pub(crate) cookie_value: String,
+    pub(crate) max_new_entries: usize,
 }
 
 impl FeedReader {
@@ -25,7 +26,13 @@ impl FeedReader {
             None => entries,
         };
 
-        Ok(new_entries)
+        let limited_new_entries = new_entries
+            .iter()
+            .take(self.max_new_entries)
+            .cloned()
+            .collect();
+
+        Ok(limited_new_entries)
     }
 
     fn fetch_feed(&self) -> Result<impl Read> {

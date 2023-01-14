@@ -55,6 +55,7 @@ impl Application {
             feed_reader: FeedReader {
                 url: config.feed_url,
                 cookie_value: config.feed_cookie_value,
+                max_new_entries: config.feed_max_new_entries,
             },
             announcer: Announcer {
                 webhook_text_template: config.webhook_text_template,

@@ -3,6 +3,9 @@
 
 ## 0.4.0 (unreleased)
 
+- Added configuration property `feed_max_new_entries` to limit the
+  number of feed items announced as new.
+
 - Added missing Docker mount for file with last processed ID.
 
 
