@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.5.0 (unreleased)
+
+
 ## 0.4.0 (2023-01-24)
 
 - Added configuration property `feed_max_new_entries` to limit the
