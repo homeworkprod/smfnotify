@@ -3,4 +3,5 @@ services:
     image: ghcr.io/homeworkprod/smfnotify:0.3.0
     volumes:
       - ./config.toml:/config.toml:ro
+      - ./last_processed_id:/last_processed_id:rw
     restart: unless-stopped

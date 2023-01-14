@@ -3,6 +3,8 @@
 
 ## 0.4.0 (unreleased)
 
+- Added missing Docker mount for file with last processed ID.
+
 
 ## 0.3.0 (2023-01-24)
 
