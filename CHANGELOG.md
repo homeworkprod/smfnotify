@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 0.4.0 (unreleased)
+
+
 ## 0.3.0 (2023-01-24)
 
 - Added interval configuration property to repeatedly fetch and process
