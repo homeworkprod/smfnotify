@@ -36,9 +36,7 @@ fn main() -> Result<()> {
 }
 
 fn configure_logging(level: Level) {
-    env_logger::builder()
-        .filter_level(level.to_level_filter())
-        .init();
+    simple_logger::init_with_level(level).unwrap()
 }
 
 struct Application {

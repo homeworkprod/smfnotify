@@ -15,10 +15,10 @@ categories = ["command-line-utilities"]
 [dependencies]
 anyhow = "1.0"
 clap = { version = "4.0", features = ["derive"] }
-env_logger = { version = "0.10.0", default-features = false }
 feed-rs = "1.2"
 log = "0.4.17"
 serde = { version = "1", features = ["derive"] }
 serde_with = "2.2.0"
+simple_logger = { version = "4.0.0", features = ["colors", "stderr", "timestamps"] }
 toml = "0.5"
 ureq = { version = "2.5.0", features = ["json"] }
