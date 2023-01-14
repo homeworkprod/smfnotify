@@ -12,6 +12,8 @@
 - Added log level configuration property. Replaces command line option
   `-q`/`--quiet`.
 
+- Added `Dockerfile`.
+
 - Updated clap to v4.1.
 
 - Updated feed-rs to v1.2.
