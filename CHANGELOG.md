@@ -12,7 +12,7 @@
 - Added log level configuration property. Replaces command line option
   `-q`/`--quiet`.
 
-- Added `Dockerfile`.
+- Added `Dockerfile` and Docker Compose file.
 
 - Updated clap to v4.1.
 
