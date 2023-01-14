@@ -10,6 +10,8 @@
 
 - Log success or failure of webhook calls instead of exiting.
 
+- Updated clap to v4.1.1.
+
 
 ## 0.3.0 (2023-01-24)
 
