@@ -4,7 +4,7 @@
 feed_url = "https://forum.example.com/index.php?action=.xml;type=atom"
 feed_cookie_value = "<insert value of your 'SMFCookie10' cookie>"
 
-last_processed_id_filename = "smfnotify.last_processed_id"
+last_processed_id_filename = "last_processed_id"
 
 webhook_text_template = "{author} posted to forum: \"{title}\" - <{url}>"
 webhook_url = "http://127.0.0.1:8080/<your-webhook-path>"
