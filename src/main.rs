@@ -6,11 +6,11 @@
 #[macro_use]
 extern crate log;
 
-use announce::Announcer;
+use crate::announce::Announcer;
+use crate::config::Config;
+use crate::feed::FeedReader;
+use crate::idkeeper::IdKeeper;
 use anyhow::Result;
-use config::Config;
-use feed::FeedReader;
-use idkeeper::IdKeeper;
 use log::Level;
 use std::thread;
 use std::time::Duration;
