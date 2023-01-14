@@ -1,3 +1,6 @@
+# Default: level "error"
+#log_level = "info"
+
 feed_url = "https://forum.example.com/index.php?action=.xml;type=atom"
 feed_cookie_value = "<insert value of your 'SMFCookie10' cookie>"
 

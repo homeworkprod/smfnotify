@@ -11,7 +11,7 @@ use anyhow::Result;
 use config::Config;
 use feed::FeedReader;
 use idkeeper::IdKeeper;
-use log::LevelFilter;
+use log::Level;
 use std::thread;
 use std::time::Duration;
 mod announce;
@@ -24,9 +24,9 @@ mod idkeeper;
 fn main() -> Result<()> {
     let args = cli::parse_args();
 
-    configure_logging(args.quiet);
-
     let config = config::load_config(&args.config_filename)?;
+
+    configure_logging(config.log_level);
 
     let app = Application::new(config);
 
@@ -35,13 +35,10 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn configure_logging(quiet: bool) {
-    let level_filter = if quiet {
-        LevelFilter::Error
-    } else {
-        LevelFilter::Info
-    };
-    env_logger::builder().filter_level(level_filter).init();
+fn configure_logging(level: Level) {
+    env_logger::builder()
+        .filter_level(level.to_level_filter())
+        .init();
 }
 
 struct Application {

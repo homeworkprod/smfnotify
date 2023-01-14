@@ -4,8 +4,9 @@
  */
 
 use anyhow::Result;
+use log::Level;
 use serde::Deserialize;
-use serde_with::{serde_as, DurationSeconds};
+use serde_with::{serde_as, DisplayFromStr, DurationSeconds};
 use std::fs::read_to_string;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
@@ -13,6 +14,9 @@ use std::time::Duration;
 #[serde_as]
 #[derive(Debug, Deserialize)]
 pub(crate) struct Config {
+    #[serde(default = "get_default_log_level")]
+    #[serde_as(as = "DisplayFromStr")]
+    pub(crate) log_level: Level,
     pub(crate) feed_cookie_value: String,
     pub(crate) feed_url: String,
 
@@ -24,6 +28,10 @@ pub(crate) struct Config {
     #[serde(rename = "interval_in_seconds")]
     #[serde_as(as = "Option<DurationSeconds<u64>>")]
     pub(crate) interval: Option<Duration>,
+}
+
+fn get_default_log_level() -> Level {
+    Level::Error
 }
 
 /// Load configuration from TOML file.

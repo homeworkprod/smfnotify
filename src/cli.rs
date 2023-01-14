@@ -13,10 +13,6 @@ pub(crate) struct Args {
     /// Configuration filename
     #[clap(short = 'c', long = "config")]
     pub config_filename: PathBuf,
-
-    /// Suppress output
-    #[clap(short, long)]
-    pub quiet: bool,
 }
 
 pub(crate) fn parse_args() -> Args {
