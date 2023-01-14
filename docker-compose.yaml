@@ -2,5 +2,5 @@ services:
   smfnotify:
     image: ghcr.io/homeworkprod/smfnotify:0.3.0
     volumes:
-      - ./config.toml:/config.toml
+      - ./config.toml:/config.toml:ro
     restart: unless-stopped
