@@ -12,7 +12,7 @@
 - Added log level configuration property. Replaces command line option
   `-q`/`--quiet`.
 
-- Updated clap to v4.0.
+- Updated clap to v4.1.
 
 - Updated feed-rs to v1.2.
 
