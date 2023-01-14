@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.4.0 (unreleased)
+## 0.4.0 (2023-01-24)
 
 - Added configuration property `feed_max_new_entries` to limit the
   number of feed items announced as new.
