@@ -7,7 +7,7 @@
 extern crate log;
 
 use crate::announce::Announcer;
-use crate::config::Config;
+use crate::config::{load_config, Config};
 use crate::feed::FeedReader;
 use crate::idkeeper::IdKeeper;
 use anyhow::Result;
@@ -24,7 +24,7 @@ mod idkeeper;
 fn main() -> Result<()> {
     let args = cli::parse_args();
 
-    let config = config::load_config(&args.config_filename)?;
+    let config = load_config(&args.config_filename)?;
 
     configure_logging(config.log_level);
 
