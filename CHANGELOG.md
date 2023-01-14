@@ -16,6 +16,8 @@
 
 - Updated feed-rs to v1.2.
 
+- Updated ureq to v2.6.1.
+
 
 ## 0.2.0 (2022-07-17)
 
