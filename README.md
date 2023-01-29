@@ -7,8 +7,9 @@ a configurable webhook endpoint.
 
 ## Usage
 
-SMFNotify is intended to be invoked regularly, for example as a cron job
-executed every five minutes.
+SMFNotify is intended to be invoked regularly, for example every few
+minutes (depending on the activity of the monitored forum and how
+quickly people want to be informed about new posts).
 
 Each invocation fetches the feed, looks for new entries, and calls the
 webhook for each one before exiting.
@@ -31,11 +32,16 @@ last_processed_id_filename = "last_processed_id"
 
 webhook_text_template = "{author} posted to forum: \"{title}\" - <{url}>"
 webhook_url = "http://127.0.0.1:8080/<your-webhook-path>"
+
+interval_in_seconds = 120
 ```
 
 To obtain the cookie value, log in to the forum, then use your web
 browser's debugger or an extension to look up the cookie named
 ``SMFCookie10``.
+
+The interval is optional. If it is not set, SMFNotify will only fetch
+and potentially notify about new entries just once, then exit.
 
 
 ## Background
