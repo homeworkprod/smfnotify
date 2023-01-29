@@ -44,6 +44,21 @@ The interval is optional. If it is not set, SMFNotify will only fetch
 and potentially notify about new entries just once, then exit.
 
 
+## Docker
+
+Both a ``Dockerfile`` and a ``docker-compose.yaml`` are included to
+support running SMFNotify with Docker and Docker Compose.
+
+Be sure to provide:
+
+- a configuration file named ``config.toml`` (and configure an interval)
+  and
+- a ``last_processed_id`` file (can be empty; create with ``touch
+  last_processed_id``)
+
+to avoid issues.
+
+
 ## Background
 
 SMFNotify is a port of a Python script I wrote in October 2015.
