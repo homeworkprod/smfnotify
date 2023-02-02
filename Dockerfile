@@ -1,4 +1,4 @@
-FROM rust:1.66 as builder
+FROM rust:1.67 as builder
 
 WORKDIR /usr/src/smfnotify
 
@@ -13,6 +13,6 @@ RUN cargo build --release && \
 COPY ./src ./src
 RUN cargo build --release
 
-FROM rust:1.66-slim-bullseye
+FROM rust:1.67-slim-bullseye
 COPY --from=builder /usr/src/smfnotify/target/release/smfnotify .
 CMD ["./smfnotify", "--config", "config.toml"]
