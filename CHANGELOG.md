@@ -5,6 +5,8 @@
 
 - Renamed Docker Compose file to `compose.yaml`.
 
+- Updated toml to v0.7.
+
 
 ## 0.4.0 (2023-01-24)
 
