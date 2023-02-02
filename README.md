@@ -46,8 +46,8 @@ and potentially notify about new entries just once, then exit.
 
 ## Docker
 
-Both a ``Dockerfile`` and a ``docker-compose.yaml`` are included to
-support running SMFNotify with Docker and Docker Compose.
+Both a ``Dockerfile`` and a ``compose.yaml`` are included to support
+running SMFNotify with Docker and Docker Compose.
 
 Be sure to provide:
 

@@ -1,5 +1,5 @@
+compose.yaml
 Dockerfile
-docker-compose.yaml
 last_processed_id
 target
 .dockerignore

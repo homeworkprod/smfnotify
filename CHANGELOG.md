@@ -3,6 +3,8 @@
 
 ## 0.5.0 (unreleased)
 
+- Renamed Docker Compose file to `compose.yaml`.
+
 
 ## 0.4.0 (2023-01-24)
 
