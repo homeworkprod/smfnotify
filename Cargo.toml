@@ -14,7 +14,7 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 anyhow = "1.0"
-clap = { version = "4.1.1", features = ["derive"] }
+clap = { version = "4.1.4", features = ["derive"] }
 feed-rs = "1.2"
 log = "0.4.17"
 serde = { version = "1", features = ["derive"] }

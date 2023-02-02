@@ -5,6 +5,8 @@
 
 - Renamed Docker Compose file to `compose.yaml`.
 
+- Updated clap to v4.1.4.
+
 - Updated toml to v0.7.
 
 - Updated ureq to v2.6.2.
