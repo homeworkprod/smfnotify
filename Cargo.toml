@@ -21,4 +21,4 @@ serde = { version = "1", features = ["derive"] }
 serde_with = "2.2.0"
 simple_logger = { version = "4.0.0", features = ["colors", "stderr", "timestamps"] }
 toml = "0.7"
-ureq = { version = "2.6.1", features = ["json"] }
+ureq = { version = "2.6.2", features = ["json"] }
