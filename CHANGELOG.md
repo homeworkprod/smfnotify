@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.5.0 (unreleased)
+## 0.5.0 (2023-02-03)
 
 - Renamed Docker Compose file to `compose.yaml`.
 
